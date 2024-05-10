@@ -36,12 +36,12 @@ recognition.onresult = function (event) {
 
 humanMessage = (message) => {
     console.log(message);
-    
+    doScreenshot();
     recognition.stop();
 
     addLine(message, "Human")
-    
-    socket.emit('chat message', {message });
+    imageBase64 = $(".screenshot-image").attr("src");
+    socket.emit('chat message', {message,imageBase64 });
 
 }
 
@@ -73,5 +73,6 @@ $(() => {
     socket.on('chat response', function(message) {
             addLine(message, "AI");
             talk(message, () => { setTimeout(() => { recognition.start(), 1000 }) })
+
         })
 })

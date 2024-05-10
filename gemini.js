@@ -3,7 +3,7 @@ const vertex_ai = new VertexAI({project: 'gdg-genai-workshop', location: 'us-cen
 const model = 'gemini-1.5-pro-preview-0409';
 const prompt = require('./prompt');
 
-const invoke = async (message) => {
+const invoke = async (message, imageBase64) => {
 
     
     const generativeModel = vertex_ai.preview.getGenerativeModel({
@@ -32,13 +32,14 @@ const invoke = async (message) => {
         }
       ],
     });
-   
+    const base64Image = imageBase64.replace("data:image/webp;base64,", "")
+    const imagePart = {inline_data: {data: base64Image, mime_type: 'image/jpeg'}}
 
     text = prompt.jarvis(message)
     
       const req = {
         contents: [
-          {role: 'user', parts: [{text}]}
+          {role: 'user', parts: [{text}, imagePart]}
         ],
       };
     
