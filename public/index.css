@@ -1,0 +1,18 @@
+html {
+    background-color: black;
+}
+
+body {
+    font-family: monospace;
+    color: chartreuse;
+}
+
+#console div {
+    margin: 1em;
+}
+canvas {
+    display: none;
+}
+video, .screenshot-image {
+    max-width: 300px;
+}
